@@ -811,12 +811,39 @@ class Tokenization:
         for token in self.tokens:
             token.macronize(domacronize, alsomaius, performutov, performitoj)
     # enddef
-
+    # BOOKMARK
     def detokenize(self, markambiguous):
         result = []
         for token in self.tokens:
             if token.isword:
+                print token.macronized
+                print "token.accented", token.accented
                 unicodetext = postags.unicodeaccents(token.macronized)
+                print "unicodetext",unicodetext
+                possibles=(set([x.replace("^", "") for x in token.accented]))
+                print "possibles",possibles 
+                
+                unicode_possibles=[postags.unicodeaccents(x) for x in possibles]
+                print "unicode_possibles", unicode_possibles
+
+                uniq=[set(x) for x in zip(*unicode_possibles)]
+                print uniq
+
+                subresult=[]
+                for u in uniq:
+                    if(len(u)==1):
+                        for x in u:
+                            subresult.append(x)
+                    else:
+                        subresult.append('[')
+                        for x in u:
+                            subresult.append(x)
+                        subresult.append(']')
+
+                unicodetext = "".join(subresult)
+
+
+                    
                 if markambiguous:
                     unicodetext = re.sub(r"([āēīōūȳĀĒĪŌŪȲaeiouyAEIOUY])", "<span>\\1</span>", unicodetext)
                     if token.isunknown:

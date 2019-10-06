@@ -1,0 +1,9 @@
+RFTagger
+ldt-corpus.txt
+lemmas.py
+macronized_endings.py
+morpheus/
+rftagger-ldt.model
+rftagger-lexicon.txt
+treebank_data/
+
