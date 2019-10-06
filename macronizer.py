@@ -816,18 +816,18 @@ class Tokenization:
         result = []
         for token in self.tokens:
             if token.isword:
-                print token.macronized
-                print "token.accented", token.accented
+                #print token.macronized
+                #print "token.accented", token.accented
                 unicodetext = postags.unicodeaccents(token.macronized)
-                print "unicodetext",unicodetext
+                #print "unicodetext",unicodetext
                 possibles=(set([x.replace("^", "") for x in token.accented]))
-                print "possibles",possibles 
+                #print "possibles",possibles 
                 
                 unicode_possibles=[postags.unicodeaccents(x) for x in possibles]
-                print "unicode_possibles", unicode_possibles
+                #print "unicode_possibles", unicode_possibles
 
                 uniq=[set(x) for x in zip(*unicode_possibles)]
-                print uniq
+                #print uniq
 
                 subresult=[]
                 for u in uniq:
